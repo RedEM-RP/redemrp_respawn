@@ -2,7 +2,7 @@
   --  print("DEV PRINT")
 --end, false)
 
-AddEventHandler('onClientMapStart', function()
+--[[AddEventHandler('onClientMapStart', function()
 	ShutdownLoadingScreen()
 	NetworkResurrectLocalPlayer(-189.47, 630.58, 114.93, 59.95, true, true, false)
 	local ped = PlayerPedId()
@@ -16,7 +16,7 @@ AddEventHandler('onClientMapStart', function()
 	TriggerEvent('playerSpawned', spawn)
 	Citizen.InvokeNative(0xF808475FA571D823, true)
 	NetworkSetFriendlyFireOption(true)
-end)
+end)]]
 
 
 local respawned = false
@@ -25,6 +25,7 @@ local _source = source
 if Config.RespawnCommand then
 	--respawn(_source)
 	respawned = true
+	respawn()
 	else
 	end
 end, false)
@@ -40,52 +41,54 @@ end, false)
 
 
 Citizen.CreateThread(function()
-while true do
-Citizen.Wait(0) -- DO NOT REMOVE
-local pl = Citizen.InvokeNative(0x217E9DC48139933D)
-	while Citizen.InvokeNative(0x2E9C3FCB6798F397, pl) do
-	Citizen.Wait(0) -- DO NOT REMOVE
-	local timer = GetGameTimer()+Config.RespawnTime
-	while timer >= GetGameTimer() do
-	 if respawned == false then
-	Citizen.Wait(0) -- DO NOT REMOVE
-		Citizen.InvokeNative(0xFA08722A5EA82DA7, Config.Timecycle)
-		Citizen.InvokeNative(0xFDB74C9CC54C3F37, Config.TimecycleStrenght)
-		Citizen.InvokeNative(0x405224591DF02025, 0.50, 0.475, 1.0, 0.22, 1, 1, 1, 100, true, true)
-		DrawTxt(Config.LocaleDead, 0.50, 0.40, 1.0, 1.0, true, 161, 3, 0, 255, true)
-		DrawTxt(Config.LocaleTimer .. " " .. tonumber(string.format("%.0f", (((GetGameTimer() - timer) * -1)/1000))), 0.50, 0.50, 0.7, 0.7, true, 255, 255, 255, 255, true) 
-			--print ("PLAYER IS DEAD")
-			DisplayHud(false)
-    DisplayRadar(false)
-	else
-		respawned = false
-		break
-	end
+	while true do
+		Citizen.Wait(0) -- DO NOT REMOVE
+		local pl = Citizen.InvokeNative(0x217E9DC48139933D)
+		while Citizen.InvokeNative(0x2E9C3FCB6798F397, pl) do
+			Citizen.Wait(0) -- DO NOT REMOVE
+			local timer = GetGameTimer()+Config.RespawnTime
+			while timer >= GetGameTimer() do
+				if respawned == false then
+					Citizen.Wait(0) -- DO NOT REMOVE
+					Citizen.InvokeNative(0xFA08722A5EA82DA7, Config.Timecycle)
+					Citizen.InvokeNative(0xFDB74C9CC54C3F37, Config.TimecycleStrenght)
+					Citizen.InvokeNative(0x405224591DF02025, 0.50, 0.475, 1.0, 0.22, 1, 1, 1, 100, true, true)
+					DrawTxt(Config.LocaleDead, 0.50, 0.40, 1.0, 1.0, true, 161, 3, 0, 255, true)
+					DrawTxt(Config.LocaleTimer .. " " .. tonumber(string.format("%.0f", (((GetGameTimer() - timer) * -1)/1000))), 0.50, 0.50, 0.7, 0.7, true, 255, 255, 255, 255, true) 
+					--print ("PLAYER IS DEAD")
+					DisplayHud(false)
+					DisplayRadar(false)
+				else
+					respawned = false
+					break
 				end
-				--Citizen.InvokeNative(0x40C719A5E410B9E4, 1) -- FADE OUT    //   BROKEN AT THIS MOMENT 18/11/2019
-				respawn() -- Calling the respawn function here
-				--Citizen.Wait(1)
-					end
-						end
+			end
+
+			respawn() -- Calling the respawn function here
+		end
+	end
 end)
 
-function respawn(source)
-local _source = source
-SendNUIMessage({
-	type = 1,
-	showMap = true
-})
-SetNuiFocus(true, true)
+function respawn()
+	SendNUIMessage({
+		type = 1,
+		showMap = true
+	})
+	SetNuiFocus(true, true)
 
-local pl = Citizen.InvokeNative(0x217E9DC48139933D)
-local ped = Citizen.InvokeNative(0x275F255ED201B937, pl)
-local coords = GetEntityCoords(ped, false)
-SetEntityCoords(ped, coords.x, coords.y, coords.z - 128.0)
-FreezeEntityPosition(ped, true)
+	local pl = Citizen.InvokeNative(0x217E9DC48139933D)
+	local ped = Citizen.InvokeNative(0x275F255ED201B937, pl)
+	local coords = GetEntityCoords(ped, false)
+	SetEntityCoords(ped, coords.x, coords.y, coords.z - 128.0)
+	FreezeEntityPosition(ped, true)
     Citizen.InvokeNative(0x71BC8E838B9C6035, ped)
 	Citizen.InvokeNative(0x0E3F4AF2D63491FB)
-
 end
+
+RegisterNetEvent("redemrp_respawn:respawn")
+AddEventHandler("redemrp_respawn:respawn", function()
+	respawn()
+end)
 
 RegisterNUICallback('select', function(spawn, cb)
 	local coords = Config[spawn][math.random(#Config[spawn])]
