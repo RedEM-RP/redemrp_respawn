@@ -1,7 +1,7 @@
 Config = {}
 Config.RespawnTime = 30000
-Config.LocaleDead = "Nie żyjesz"
-Config.LocaleTimer = "Odrodzenie dostępne za"
+Config.LocaleDead = "You died!"
+Config.LocaleTimer = "Respawning in"
 Config.Timecycle = "CrossLine01" --Set the timecycle effect for a death
 Config.TimecycleStrenght = 1.0
 Config.RespawnCommand = true

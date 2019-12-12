@@ -97,11 +97,11 @@ RegisterNUICallback('select', function(spawn, cb)
 		showMap = false
 	})
 	FreezeEntityPosition(ped, false)
-	TriggerEvent("xrp_respawn:camera", coords)
+	TriggerEvent("redemrp_respawn:camera", coords)
 end)
 
-RegisterNetEvent('xrp_respawn:camera')
-AddEventHandler('xrp_respawn:camera', function(cord)
+RegisterNetEvent('redemrp_respawn:camera')
+AddEventHandler('redemrp_respawn:camera', function(cord)
 	DoScreenFadeIn(500)
 	local coords = cord
 	cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", 621.67,374.08,873.24, 300.00,0.00,0.00, 100.00, false, 0) -- CAMERA COORDS
