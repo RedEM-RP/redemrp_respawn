@@ -2,22 +2,6 @@
   --  print("DEV PRINT")
 --end, false)
 
---[[AddEventHandler('onClientMapStart', function()
-	ShutdownLoadingScreen()
-	NetworkResurrectLocalPlayer(-189.47, 630.58, 114.93, 59.95, true, true, false)
-	local ped = PlayerPedId()
-	SetEntityCoordsNoOffset(ped, -189.47, 630.58, 114.93, false, false, false, true)
-	ClearPedTasksImmediately(ped)
-	ClearPlayerWantedLevel(PlayerId())
-	FreezeEntityPosition(ped, false)
-	SetPlayerInvincible(PlayerId(), false)
-	SetEntityVisible(ped, true)
-	SetEntityCollision(ped, true)
-	TriggerEvent('playerSpawned', spawn)
-	Citizen.InvokeNative(0xF808475FA571D823, true)
-	NetworkSetFriendlyFireOption(true)
-end)]]
-
 
 local respawned = false
 RegisterCommand("respawn", function(source, args, rawCommand) -- Its breaking the time for now - just dev command
@@ -100,6 +84,20 @@ RegisterNUICallback('select', function(spawn, cb)
 		showMap = false
 	})
 	FreezeEntityPosition(ped, false)
+
+	ShutdownLoadingScreen()
+	NetworkResurrectLocalPlayer(coords.x, coords.y, coords.z, 59.95, true, true, false)
+	local ped = PlayerPedId()
+	SetEntityCoordsNoOffset(ped, coords.x, coords.y, coords.z, false, false, false, true)
+	ClearPedTasksImmediately(ped)
+	ClearPlayerWantedLevel(PlayerId())
+	FreezeEntityPosition(ped, false)
+	SetPlayerInvincible(PlayerId(), false)
+	SetEntityVisible(ped, true)
+	SetEntityCollision(ped, true)
+	TriggerEvent('playerSpawned', spawn)
+	Citizen.InvokeNative(0xF808475FA571D823, true)
+	NetworkSetFriendlyFireOption(true)
 	TriggerEvent("redemrp_respawn:camera", coords)
 end)
 
