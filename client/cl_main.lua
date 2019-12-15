@@ -101,6 +101,7 @@ RegisterNUICallback('select', function(spawn, cb)
 	})
 	FreezeEntityPosition(ped, false)
 	TriggerEvent("redemrp_respawn:camera", coords)
+        TriggerServerEvent("redemrp_skin:loadSkin", function(cb) end)
 end)
 
 RegisterNetEvent('redemrp_respawn:camera')
