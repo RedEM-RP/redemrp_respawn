@@ -18,7 +18,7 @@
 	NetworkSetFriendlyFireOption(true)
 end)]]
 
-
+local new_character = 0
 local respawned = false
 RegisterCommand("respawn", function(source, args, rawCommand) -- Its breaking the time for now - just dev command
 local _source = source
@@ -86,7 +86,9 @@ function respawn()
 end
 
 RegisterNetEvent("redemrp_respawn:respawn")
-AddEventHandler("redemrp_respawn:respawn", function()
+AddEventHandler("redemrp_respawn:respawn", function(new1)
+	local new = new1
+	new_character = tonumber(new)
 	respawn()
 end)
 
@@ -101,6 +103,10 @@ RegisterNUICallback('select', function(spawn, cb)
 	})
 	FreezeEntityPosition(ped, false)
 	TriggerEvent("redemrp_respawn:camera", coords)
+	if new_character == 1 then
+	TriggerEvent("redemrp_skin:openCreator")
+	print("new character")
+	end
 end)
 
 RegisterNetEvent('redemrp_respawn:camera')
