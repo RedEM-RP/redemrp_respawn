@@ -58,6 +58,7 @@ Citizen.CreateThread(function()
 					--print ("PLAYER IS DEAD")
 					DisplayHud(false)
 					DisplayRadar(false)
+					exports.spawnmanager:setAutoSpawn(false) -- disable respawn
 				else
 					respawned = false
 					break
