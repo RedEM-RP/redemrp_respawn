@@ -137,11 +137,17 @@ AddEventHandler('redemrp_respawn:camera', function(cord)
 	DestroyCam(cam3, true)
 	DisplayHud(true)
     DisplayRadar(true)
-	Citizen.Wait(3000)
+	Citizen.Wait(5000)
 	if new_character == 0 then
 		TriggerServerEvent("redemrp_skin:loadSkin", function(cb)
 		end)
 	end
+	Citizen.Wait(5000)
+	local model = IsPedModel(PlayerPedId(), "mp_male")	
+		if model then
+		TriggerServerEvent("redemrp_skin:loadSkin", function(cb)	
+	end
+		
 end)
 --=============================================================-- DRAW TEXT SECTION--=============================================================--
 function DrawTxt(str, x, y, w, h, enableShadow, col1, col2, col3, a, centre)
