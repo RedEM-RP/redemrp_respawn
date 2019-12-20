@@ -1,18 +1,5 @@
---RegisterCommand("devprint", function(source, args, rawCommand)
-  --  print("DEV PRINT")
---end, false)
-
-
+local new_character = 0
 local respawned = false
-RegisterCommand("respawn", function(source, args, rawCommand) -- Its breaking the time for now - just dev command
-local _source = source
-if Config.RespawnCommand then
-	--respawn(_source)
-	respawned = true
-	respawn()
-	else
-	end
-end, false)
 
 RegisterCommand("kys", function(source, args, rawCommand) -- KILL YOURSELF COMMAND
 local _source = source
@@ -42,6 +29,7 @@ Citizen.CreateThread(function()
 					--print ("PLAYER IS DEAD")
 					DisplayHud(false)
 					DisplayRadar(false)
+					exports.spawnmanager:setAutoSpawn(false) -- disable respawn
 				else
 					respawned = false
 					break
@@ -70,7 +58,9 @@ function respawn()
 end
 
 RegisterNetEvent("redemrp_respawn:respawn")
-AddEventHandler("redemrp_respawn:respawn", function()
+AddEventHandler("redemrp_respawn:respawn", function(new1)
+	local new = new1
+	new_character = tonumber(new)
 	respawn()
 end)
 
@@ -99,6 +89,10 @@ RegisterNUICallback('select', function(spawn, cb)
 	Citizen.InvokeNative(0xF808475FA571D823, true)
 	NetworkSetFriendlyFireOption(true)
 	TriggerEvent("redemrp_respawn:camera", coords)
+	if new_character == 1 then
+	TriggerEvent("redemrp_skin:openCreator")
+	print("new character")
+	end
 end)
 
 RegisterNetEvent('redemrp_respawn:camera')
@@ -128,6 +122,11 @@ AddEventHandler('redemrp_respawn:camera', function(cord)
 	DestroyCam(cam3, true)
 	DisplayHud(true)
     DisplayRadar(true)
+	Citizen.Wait(3000)
+	if new_character == 0 then
+		TriggerServerEvent("redemrp_skin:loadSkin", function(cb)
+		end)
+	end
 end)
 --=============================================================-- DRAW TEXT SECTION--=============================================================--
 function DrawTxt(str, x, y, w, h, enableShadow, col1, col2, col3, a, centre)
