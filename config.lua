@@ -6,6 +6,7 @@ Config.Timecycle = "CrossLine01" --Set the timecycle effect for a death
 Config.TimecycleStrenght = 1.0
 Config.RespawnCommand = true
 Config.kysCommand = true
+Config.UsingClothes = true -- If you are using RedEM-RP Clothing, set this to 'true' otherwise, keep it false (https://github.com/RedEM-RP/redemrp_clothing)
 
 Config.Spawnpoints = { -- TEMPORARY
     {x=205.73,y=118.26,z=99.28},

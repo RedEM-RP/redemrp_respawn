@@ -1,34 +1,5 @@
---RegisterCommand("devprint", function(source, args, rawCommand)
-  --  print("DEV PRINT")
---end, false)
-
---[[AddEventHandler('onClientMapStart', function()
-	ShutdownLoadingScreen()
-	NetworkResurrectLocalPlayer(-189.47, 630.58, 114.93, 59.95, true, true, false)
-	local ped = PlayerPedId()
-	SetEntityCoordsNoOffset(ped, -189.47, 630.58, 114.93, false, false, false, true)
-	ClearPedTasksImmediately(ped)
-	ClearPlayerWantedLevel(PlayerId())
-	FreezeEntityPosition(ped, false)
-	SetPlayerInvincible(PlayerId(), false)
-	SetEntityVisible(ped, true)
-	SetEntityCollision(ped, true)
-	TriggerEvent('playerSpawned', spawn)
-	Citizen.InvokeNative(0xF808475FA571D823, true)
-	NetworkSetFriendlyFireOption(true)
-end)]]
-
 local new_character = 0
 local respawned = false
-RegisterCommand("respawn", function(source, args, rawCommand) -- Its breaking the time for now - just dev command
-local _source = source
-if Config.RespawnCommand then
-	--respawn(_source)
-	respawned = true
-	respawn()
-	else
-	end
-end, false)
 
 RegisterCommand("kys", function(source, args, rawCommand) -- KILL YOURSELF COMMAND
 local _source = source
@@ -103,12 +74,41 @@ RegisterNUICallback('select', function(spawn, cb)
 		showMap = false
 	})
 	FreezeEntityPosition(ped, false)
+
+	ShutdownLoadingScreen()
+	NetworkResurrectLocalPlayer(coords.x, coords.y, coords.z, 59.95, true, true, false)
+	local ped = PlayerPedId()
+	SetEntityCoordsNoOffset(ped, coords.x, coords.y, coords.z, false, false, false, true)
+	ClearPedTasksImmediately(ped)
+	ClearPlayerWantedLevel(PlayerId())
+	FreezeEntityPosition(ped, false)
+	SetPlayerInvincible(PlayerId(), false)
+	SetEntityVisible(ped, true)
+	SetEntityCollision(ped, true)
+	TriggerEvent('playerSpawned', spawn)
+	Citizen.InvokeNative(0xF808475FA571D823, true)
+	NetworkSetFriendlyFireOption(true)
 	TriggerEvent("redemrp_respawn:camera", coords)
 	if new_character == 1 then
 	TriggerEvent("redemrp_skin:openCreator")
 	print("new character")
+	new_character = 0
+	else
+		TriggerServerEvent("redemrp_skin:loadSkin", function(cb)
+		end)
+	if Config.UsingClothes then
+		LoadClothes()
+	else end
 	end
 end)
+
+function LoadClothes()
+	Citizen.CreateThread(function()
+		Citizen.Wait(5000)
+		TriggerServerEvent("redemrp_clothing:loadClothes", function(cb)
+        end)
+		end)
+end
 
 RegisterNetEvent('redemrp_respawn:camera')
 AddEventHandler('redemrp_respawn:camera', function(cord)
@@ -138,10 +138,7 @@ AddEventHandler('redemrp_respawn:camera', function(cord)
 	DisplayHud(true)
     DisplayRadar(true)
 	Citizen.Wait(3000)
-	if new_character == 0 then
-		TriggerServerEvent("redemrp_skin:loadSkin", function(cb)
-		end)
-	end
+	
 end)
 --=============================================================-- DRAW TEXT SECTION--=============================================================--
 function DrawTxt(str, x, y, w, h, enableShadow, col1, col2, col3, a, centre)
