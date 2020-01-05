@@ -89,6 +89,9 @@ RegisterNUICallback('select', function(spawn, cb)
 	Citizen.InvokeNative(0xF808475FA571D823, true)
 	NetworkSetFriendlyFireOption(true)
 	TriggerEvent("redemrp_respawn:camera", coords)
+		if Config.UsingInventory then
+			TriggerServerEvent("player:getItems", source)
+		else end
 	if new_character == 1 then
 	TriggerEvent("redemrp_skin:openCreator")
 	print("new character")
