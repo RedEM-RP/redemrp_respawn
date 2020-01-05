@@ -7,6 +7,7 @@ Config.TimecycleStrenght = 1.0
 Config.RespawnCommand = true
 Config.kysCommand = true
 Config.UsingClothes = true -- If you are using RedEM-RP Clothing, set this to 'true' otherwise, keep it false (https://github.com/RedEM-RP/redemrp_clothing)
+Config.UsingInventory = true -- If you are using RedEM-RP Inventory, set this to 'true' otherwise, keep it false (https://github.com/RedEM-RP/redemrp_inventory)
 
 Config.Spawnpoints = { -- TEMPORARY
     {x=205.73,y=118.26,z=99.28},
