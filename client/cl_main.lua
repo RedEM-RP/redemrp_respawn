@@ -99,19 +99,8 @@ RegisterNUICallback('select', function(spawn, cb)
 	else
 		TriggerServerEvent("redemrp_skin:loadSkin", function(cb)
 		end)
-	if Config.UsingClothes then
-		LoadClothes()
-	else end
 	end
 end)
-
-function LoadClothes()
-	Citizen.CreateThread(function()
-		Citizen.Wait(5000)
-		 TriggerServerEvent("redemrp_clothing:loadClothes", 1, function(cb)
-        end)
-		end)
-end
 
 RegisterNetEvent('redemrp_respawn:camera')
 AddEventHandler('redemrp_respawn:camera', function(cord)
