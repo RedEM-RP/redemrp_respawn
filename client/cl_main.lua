@@ -1,5 +1,6 @@
 local new_character = 0
 local respawned = false
+local firstjoin = true
 
 RegisterCommand("kys", function(source, args, rawCommand) -- KILL YOURSELF COMMAND
 local _source = source
@@ -97,8 +98,11 @@ RegisterNUICallback('select', function(spawn, cb)
 	print("new character")
 	new_character = 0
 	else
+		if firstjoin then
+		firstjoin = false
 		TriggerServerEvent("redemrp_skin:loadSkin", function(cb)
 		end)
+		else end
 	end
 end)
 
