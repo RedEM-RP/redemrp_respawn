@@ -1,6 +1,7 @@
 local new_character = 0
 local respawned = false
 local firstjoin = true
+local pressed = false
 
 RegisterCommand("kys", function(source, args, rawCommand) -- KILL YOURSELF COMMAND
 local _source = source
@@ -36,7 +37,14 @@ Citizen.CreateThread(function()
 					break
 				end
 			end
-
+			while not pressed do
+				Wait(0)
+				DrawTxt(Config.PressRespawn, 0.50, 0.45, 1.0, 1.0, true, 255, 255, 255, 255, true)
+				if IsControlJustReleased(0, 0xDFF812F9) then
+				pressed = true
+				end
+			end
+			pressed = false
 			respawn() -- Calling the respawn function here
 		end
 	end
