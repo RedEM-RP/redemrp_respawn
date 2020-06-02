@@ -6,12 +6,12 @@ local firstSpawn = false
 local pressed = false
 
 RegisterCommand("kys", function(source, args, rawCommand) -- KILL YOURSELF COMMAND
-local _source = source
-if Config.kysCommand then
-	local pl = Citizen.InvokeNative(0x217E9DC48139933D)
-    local ped = Citizen.InvokeNative(0x275F255ED201B937, pl)
+	local _source = source
+	if Config.kysCommand then
+		local pl = Citizen.InvokeNative(0x217E9DC48139933D)
+    	local ped = Citizen.InvokeNative(0x275F255ED201B937, pl)
         Citizen.InvokeNative(0x697157CED63F18D4, ped, 500000, false, true, true)
-		else end
+	end
 end, false)
 
 
@@ -95,20 +95,22 @@ AddEventHandler("redemrp_respawn:respawnCoords", function(coords)
 	TriggerEvent('playerSpawned')
 	Citizen.InvokeNative(0xF808475FA571D823, true)
 	NetworkSetFriendlyFireOption(true)
+
 	TriggerEvent("redemrp_respawn:camera", coords)
-		if Config.UsingInventory then
-			TriggerServerEvent("redemrp_inventory:LoadItems")
-		else end
+
+	if Config.UsingInventory then
+		TriggerServerEvent("redemrp_inventory:LoadItems")
+	end
+
 	if new_character == 1 then
-	TriggerEvent("redemrp_skin:openCreator")
-	print("new character")
-	new_character = 0
+		TriggerEvent("redemrp_skin:openCreator")
+		print("new character")
+		new_character = 0
 	else
 		if firstjoin then
-		firstjoin = false
-		TriggerServerEvent("redemrp_skin:loadSkin", function(cb)
-		end)
-		else end
+			firstjoin = false
+			TriggerServerEvent("redemrp_skin:loadSkin", function(cb)end)
+		end
 	end
 
 	alive = true
@@ -139,20 +141,22 @@ RegisterNUICallback('select', function(spawn, cb)
 	TriggerEvent('playerSpawned', spawn)
 	Citizen.InvokeNative(0xF808475FA571D823, true)
 	NetworkSetFriendlyFireOption(true)
+
 	TriggerEvent("redemrp_respawn:camera", coords)
-		if Config.UsingInventory then
-			TriggerServerEvent("redemrp_inventory:LoadItems")
-		else end
+
+	if Config.UsingInventory then
+		TriggerServerEvent("redemrp_inventory:LoadItems")
+	end
+
 	if new_character == 1 then
-	TriggerEvent("redemrp_skin:openCreator")
-	print("new character")
-	new_character = 0
+		TriggerEvent("redemrp_skin:openCreator")
+		print("new character")
+		new_character = 0
 	else
 		if firstjoin then
-		firstjoin = false
-		TriggerServerEvent("redemrp_skin:loadSkin", function(cb)
-		end)
-		else end
+			firstjoin = false
+			TriggerServerEvent("redemrp_skin:loadSkin", function(cb)end)
+		end
 	end
 
 	alive = true
