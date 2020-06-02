@@ -23,22 +23,17 @@ Citizen.CreateThread(function()
 			Citizen.Wait(0) -- DO NOT REMOVE
 			local timer = GetGameTimer()+Config.RespawnTime
 			while timer >= GetGameTimer() do
-				if respawned == false then
-					alive = false
-					Citizen.Wait(0) -- DO NOT REMOVE
-					Citizen.InvokeNative(0xFA08722A5EA82DA7, Config.Timecycle)
-					Citizen.InvokeNative(0xFDB74C9CC54C3F37, Config.TimecycleStrenght)
-					Citizen.InvokeNative(0x405224591DF02025, 0.50, 0.475, 1.0, 0.22, 1, 1, 1, 100, true, true)
-					DrawTxt(Config.LocaleDead, 0.50, 0.40, 1.0, 1.0, true, 161, 3, 0, 255, true)
-					DrawTxt(Config.LocaleTimer .. " " .. tonumber(string.format("%.0f", (((GetGameTimer() - timer) * -1)/1000))), 0.50, 0.50, 0.7, 0.7, true, 255, 255, 255, 255, true) 
-					--print ("PLAYER IS DEAD")
-					DisplayHud(false)
-					DisplayRadar(false)
-					exports.spawnmanager:setAutoSpawn(false) -- disable respawn
-				else
-					respawned = false
-					break
-				end
+				alive = false
+				Citizen.Wait(0) -- DO NOT REMOVE
+				Citizen.InvokeNative(0xFA08722A5EA82DA7, Config.Timecycle)
+				Citizen.InvokeNative(0xFDB74C9CC54C3F37, Config.TimecycleStrenght)
+				Citizen.InvokeNative(0x405224591DF02025, 0.50, 0.475, 1.0, 0.22, 1, 1, 1, 100, true, true)
+				DrawTxt(Config.LocaleDead, 0.50, 0.40, 1.0, 1.0, true, 161, 3, 0, 255, true)
+				DrawTxt(Config.LocaleTimer .. " " .. tonumber(string.format("%.0f", (((GetGameTimer() - timer) * -1)/1000))), 0.50, 0.50, 0.7, 0.7, true, 255, 255, 255, 255, true) 
+				--print ("PLAYER IS DEAD")
+				DisplayHud(false)
+				DisplayRadar(false)
+				exports.spawnmanager:setAutoSpawn(false) -- disable respawn
 			end
 			while not pressed do
 				Wait(0)
