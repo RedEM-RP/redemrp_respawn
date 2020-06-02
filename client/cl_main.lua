@@ -1,6 +1,8 @@
 local new_character = 0
 local respawned = false
+local alive = false
 local firstjoin = true
+local firstSpawn = false
 local pressed = false
 
 RegisterCommand("kys", function(source, args, rawCommand) -- KILL YOURSELF COMMAND
@@ -22,6 +24,7 @@ Citizen.CreateThread(function()
 			local timer = GetGameTimer()+Config.RespawnTime
 			while timer >= GetGameTimer() do
 				if respawned == false then
+					alive = false
 					Citizen.Wait(0) -- DO NOT REMOVE
 					Citizen.InvokeNative(0xFA08722A5EA82DA7, Config.Timecycle)
 					Citizen.InvokeNative(0xFDB74C9CC54C3F37, Config.TimecycleStrenght)
@@ -62,7 +65,7 @@ function respawn()
 	local coords = GetEntityCoords(ped, false)
 	SetEntityCoords(ped, coords.x, coords.y, coords.z - 128.0)
 	FreezeEntityPosition(ped, true)
-    Citizen.InvokeNative(0x71BC8E838B9C6035, ped)
+	Citizen.InvokeNative(0x71BC8E838B9C6035, ped)
 	Citizen.InvokeNative(0x0E3F4AF2D63491FB)
 end
 
@@ -71,6 +74,50 @@ AddEventHandler("redemrp_respawn:respawn", function(new1)
 	local new = new1
 	new_character = tonumber(new)
 	respawn()
+end)
+
+RegisterNetEvent("redemrp_respawn:respawnCoords")
+AddEventHandler("redemrp_respawn:respawnCoords", function(coords)
+	local ped = PlayerPedId()
+	SetEntityCoords(ped, coords.x, coords.y, coords.z)
+	SetNuiFocus(false, false)
+	SendNUIMessage({
+		type = 1,
+		showMap = false
+	})
+	FreezeEntityPosition(ped, false)
+
+	ShutdownLoadingScreen()
+	NetworkResurrectLocalPlayer(coords.x, coords.y, coords.z, 59.95, true, true, false)
+	local ped = PlayerPedId()
+	SetEntityCoordsNoOffset(ped, coords.x, coords.y, coords.z, false, false, false, true)
+	ClearPedTasksImmediately(ped)
+	ClearPlayerWantedLevel(PlayerId())
+	FreezeEntityPosition(ped, false)
+	SetPlayerInvincible(PlayerId(), false)
+	SetEntityVisible(ped, true)
+	SetEntityCollision(ped, true)
+	TriggerEvent('playerSpawned')
+	Citizen.InvokeNative(0xF808475FA571D823, true)
+	NetworkSetFriendlyFireOption(true)
+	TriggerEvent("redemrp_respawn:camera", coords)
+		if Config.UsingInventory then
+			TriggerServerEvent("redemrp_inventory:LoadItems")
+		else end
+	if new_character == 1 then
+	TriggerEvent("redemrp_skin:openCreator")
+	print("new character")
+	new_character = 0
+	else
+		if firstjoin then
+		firstjoin = false
+		TriggerServerEvent("redemrp_skin:loadSkin", function(cb)
+		end)
+		else end
+	end
+
+	alive = true
+	TriggerServerEvent("redemrp_respawn:registerCoords", coords)
 end)
 
 RegisterNUICallback('select', function(spawn, cb)
@@ -111,6 +158,20 @@ RegisterNUICallback('select', function(spawn, cb)
 		TriggerServerEvent("redemrp_skin:loadSkin", function(cb)
 		end)
 		else end
+	end
+
+	alive = true
+	TriggerServerEvent("redemrp_respawn:registerCoords", coords)
+end)
+
+Citizen.CreateThread(function()
+	while true do
+		Wait(20000)
+
+		if alive then
+			local coords = GetEntityCoords(PlayerPedId())
+			TriggerServerEvent("redemrp_respawn:registerCoords", {x = coords.x, y = coords.y, z = coords.z})
+		end
 	end
 end)
 
