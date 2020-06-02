@@ -99,7 +99,7 @@ RegisterNUICallback('select', function(spawn, cb)
 	NetworkSetFriendlyFireOption(true)
 	TriggerEvent("redemrp_respawn:camera", coords)
 		if Config.UsingInventory then
-			TriggerServerEvent("player:getItems", source)
+			TriggerServerEvent("redemrp_inventory:LoadItems")
 		else end
 	if new_character == 1 then
 	TriggerEvent("redemrp_skin:openCreator")
