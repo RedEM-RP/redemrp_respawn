@@ -4,7 +4,7 @@ AddEventHandler("redemrp:playerLoaded", function(_source, user)
     TriggerEvent('redemrp:getPlayerFromId', _source, function(user)
         MySQL.Async.fetchAll('SELECT * FROM characters WHERE `identifier`=@identifier AND `characterid`=@charid;', {identifier = user.get('identifier'), charid = user.getSessionVar("charid")}, function(result)            
             if(result[1].coords == "{}")then
-                TriggerClientEvent("redemrp_respawn:nocoordspawn", _source)
+                TriggerClientEvent("redemrp_respawn:respawn", _source)
             else
                 TriggerClientEvent("redemrp_respawn:respawnCoords", _source, json.decode(result[1].coords))
             end
