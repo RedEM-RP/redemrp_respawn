@@ -68,7 +68,12 @@ RegisterNetEvent("redemrp_respawn:respawn")
 AddEventHandler("redemrp_respawn:respawn", function(new1)
 	local new = new1
 	new_character = tonumber(new)
-	respawn()
+end)
+
+RegisterNetEvent("redemrp_respawn:nocoordspawn")
+AddEventHandler("redemrp_respawn:nocoordspawn", function()
+	local coords = Config.Spawnpoints[1]
+	TriggerEvent("redemrp_respawn:respawnCoords", coords)
 end)
 
 RegisterNetEvent("redemrp_respawn:respawnCoords")
