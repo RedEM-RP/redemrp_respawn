@@ -98,19 +98,10 @@ AddEventHandler("redemrp_respawn:respawnCoords", function(coords)
 
 	TriggerEvent("redemrp_respawn:camera", coords)
 
-	if Config.UsingInventory then
-		TriggerServerEvent("redemrp_inventory:LoadItems")
-	end
-
 	if new_character == 1 then
 		TriggerEvent("redemrp_skin:openCreator")
 		print("new character")
 		new_character = 0
-	else
-		if firstjoin then
-			firstjoin = false
-			TriggerServerEvent("redemrp_skin:loadSkin", function(cb)end)
-		end
 	end
 
 	alive = true
