@@ -1,6 +1,8 @@
 local playerCoords = {}
 
-AddEventHandler("redemrp:playerLoaded", function(_source, user)
+RegisterServerEvent("redemrp_respawn:CheckPos")
+AddEventHandler("redemrp_respawn:CheckPos", function()
+local _source = source
     TriggerEvent('redemrp:getPlayerFromId', _source, function(user)
         MySQL.Async.fetchAll('SELECT * FROM characters WHERE `identifier`=@identifier AND `characterid`=@charid;', {identifier = user.get('identifier'), charid = user.getSessionVar("charid")}, function(result)            
             if(result[1].coords ~= "{}")then
