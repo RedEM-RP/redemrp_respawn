@@ -180,9 +180,6 @@ RegisterNUICallback('select', function(spawn, cb)
     TriggerEvent('playerSpawned', spawn)
     Citizen.InvokeNative(0xF808475FA571D823, true)
     NetworkSetFriendlyFireOption(true)
-	if NetworkIsInTutorialSession() then
-		NetworkEndTutorialSession()
-	end
 	if newCharacter then
 	   TriggerServerEvent("redemrp_skin:loadSkin")
 	end
