@@ -64,6 +64,12 @@ Citizen.CreateThread(function()
                         --
                         --
                         --
+
+                        DisplayHud(false)
+                        DisplayRadar(false)
+                        exports.spawnmanager:setAutoSpawn(false)
+                        Citizen.InvokeNative(0xFA08722A5EA82DA7, "LensDistDrunk")
+                        Citizen.InvokeNative(0xFDB74C9CC54C3F37, 1.0)
                         TriggerServerEvent("redemrp_respawn:DeadTable", "add" , code)
                         AnimpostfxPlay("DeathFailMP01")
                         StartDeathCam()
@@ -72,11 +78,8 @@ Citizen.CreateThread(function()
 
                     Wait(1)
                     ProcessCamControls()
-                    Citizen.InvokeNative(0xFA08722A5EA82DA7, "LensDistDrunk")
-                    Citizen.InvokeNative(0xFDB74C9CC54C3F37, 1.0)
                     DrawTxt(Config.LocaleTimer .. " " .. tonumber(string.format("%.0f", (((GetGameTimer() - timer) * -1)/1000))), 0.50, 0.80, 0.7, 0.7, true, 255, 255, 255, 255, true)
-                    DisplayHud(false)
-                    DisplayRadar(false)
+                    
 
                 else
                     break
