@@ -56,9 +56,6 @@ AddEventHandler("redemrp_respawn:revive", function(id , c)
     end)
 end)
 
-
-
-
 RegisterServerEvent("redemrp_respawn:TestDeathStatus")
 AddEventHandler("redemrp_respawn:TestDeathStatus", function()
     local _source = source
@@ -72,6 +69,7 @@ AddEventHandler("redemrp_respawn:TestDeathStatus", function()
         end
     end)
 end)
+
 RegisterServerEvent("redemrp_respawn:DeadTable")
 AddEventHandler("redemrp_respawn:DeadTable", function(type , c)
     if c ~= code then return end
@@ -86,16 +84,3 @@ AddEventHandler("redemrp_respawn:DeadTable", function(type , c)
         end
     end)
 end)
-
-
-
-
-
-
-
-
-
-
-
-
-

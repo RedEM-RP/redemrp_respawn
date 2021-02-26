@@ -184,7 +184,7 @@ RegisterNUICallback('select', function(spawn, cb)
 		NetworkEndTutorialSession()
 	end
 	if newCharacter then
-	  TriggerServerEvent("rdr_creator:LoadSkin")
+	   TriggerServerEvent("redemrp_skin:loadSkin")
 	end
     RespawnCamera(coords)
     TriggerServerEvent("redemrp_respawn:registerCoords", coords)
