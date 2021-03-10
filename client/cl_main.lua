@@ -39,6 +39,10 @@ RegisterCommand("revive", function(source, args, rawCommand)
     end
 end, false)
 
+RegisterNetEvent("redemrp_respawn:RevivePlayer")
+AddEventHandler("redemrp_respawn:RevivePlayer", function(target)
+    TriggerServerEvent('redemrp_respawn:revive', target , code)
+end)
 
 RegisterNetEvent("redemrp_respawn:KillPlayer")
 AddEventHandler("redemrp_respawn:KillPlayer", function(c)
