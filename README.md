@@ -10,5 +10,11 @@ if not -> [RedEM](https://github.com/kanersps/redem) --> [RedEM:RP](https://gith
 ## 2. Usage
 - Any config you can set in config.lua file
 
+Trigger this only server event when you want revive player 
+
+```
+TriggerEvent("redemrp_respawn:RevivePlayer" , PlayerServerId)
+```
+
 ## 3. Credits
 https://github.com/amakuu/
