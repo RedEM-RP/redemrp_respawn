@@ -56,6 +56,19 @@ AddEventHandler("redemrp_respawn:revive", function(id , c)
     end)
 end)
 
+
+AddEventHandler("redemrp_respawn:RevivePlayer", function(id)
+    local _source = source
+    if id ~= 0 and id ~= nil then
+        TriggerEvent('redemrp:getPlayerFromId', tonumber(id), function(user)
+            local charid = user.getSessionVar("charid")
+            print("Player z ID: [" .. _source .. "] - uses /revive on [" .. id .. "]")
+            TriggerClientEvent('redemrp_respawn:gotRevive', tonumber(id) , code )
+        end)
+    end
+end)
+
+
 RegisterServerEvent("redemrp_respawn:TestDeathStatus")
 AddEventHandler("redemrp_respawn:TestDeathStatus", function()
     local _source = source
