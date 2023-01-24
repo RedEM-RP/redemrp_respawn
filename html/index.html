@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>REDEM:RP Respawn</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+
+        body {
+            user-select: none;
+            display:none;
+            overflow:hidden;
+        }
+
+        @media screen and (min-width: 2200px) and (max-width:3400px) {
+
+            .box {
+                width: 600px;
+                height: 300px;
+                font-family: 'Oswald', sans-serif;
+                text-align: center;
+                color: #fff;
+                text-shadow: 2px 2px #333, -2px 2px #333, -2px -2px #333, 2px -2px #333;
+                transition: all 0.2s ease;
+                border: 10px solid rgba(0, 0, 0, 0.95);
+                font-size: 32pt;
+                overflow:hidden;
+                filter:sepia(1);
+            }
+            .box:hover {
+                transform:scale(1.05);
+                filter:none;
+            }
+
+            .spawntext {
+                position: absolute;
+                font-size: 28pt;
+                font-family: 'Oswald',sans-serif;
+                width: 98%;
+                text-align: center;
+                color: white;
+                overflow: hidden;
+                top: 20vh;
+                text-shadow: 2px 2px #333, -2px 2px #333, -2px -2px #333, 2px -2px #333;
+            }
+
+            .title {
+                position:relative;
+                display:none;
+                top:40%;
+            }
+
+            .container {
+                width: 80vw !important;
+                height: 50vh;
+                position: absolute;
+                left: 50%;
+                top: 25%;
+                transform: translate(-50%, 0%);
+                padding:50px;
+                overflow:hidden;
+            }
+        }
+
+        @media screen and (min-width: 1500px) and (max-width:2200px) {
+
+            .box {
+                width: 400px;
+                height: 200px;
+                font-family: 'Oswald', sans-serif;
+                text-align: center;
+                color: #fff;
+                text-shadow: 2px 2px #333, -2px 2px #333, -2px -2px #333, 2px -2px #333;
+                transition: all 0.2s ease;
+                border: 8px solid rgba(0, 0, 0, 0.95);
+                font-size: 28pt;
+                overflow:hidden;
+                filter:sepia(1);
+            }
+            .box:hover {
+                transform:scale(1.05);
+                filter:none;
+            }
+
+            .spawntext {
+                position: absolute;
+                font-size: 26pt;
+                font-family: 'Oswald',sans-serif;
+                width: 96%;
+                text-align: center;
+                color: white;
+                overflow: hidden;
+                top: 20vh;
+                text-shadow: 2px 2px #333, -2px 2px #333, -2px -2px #333, 2px -2px #333;
+            }
+
+            .title {
+                position:relative;
+                display:none;
+                top:40%;
+            }
+
+            .container {
+                width: 80vw !important;
+                height: 50vh;
+                position: absolute;
+                left: 50%;
+                top: 25%;
+                transform: translate(-50%, 0%);
+                padding:50px;
+                overflow:hidden;
+            }
+        }
+
+        @media screen and (max-width:1500px) {
+
+            .box {
+                width: 300px;
+                height: 150px;
+                font-family: 'Oswald', sans-serif;
+                text-align: center;
+                color: #fff;
+                text-shadow: 2px 2px #333, -2px 2px #333, -2px -2px #333, 2px -2px #333;
+                transition: all 0.2s ease;
+                border: 6px solid rgba(0, 0, 0, 0.95);
+                font-size: 24pt;
+                overflow:hidden;
+                filter:sepia(1);
+            }
+            .box:hover {
+                transform:scale(1.05);
+                filter:none;
+            }
+
+            .spawntext {
+                position: absolute;
+                font-size: 22pt;
+                font-family: 'Oswald',sans-serif;
+                width: 96%;
+                text-align: center;
+                color: white;
+                overflow: hidden;
+                top: 20vh;
+                text-shadow: 2px 2px #333, -2px 2px #333, -2px -2px #333, 2px -2px #333;
+            }
+
+            .title {
+                position:relative;
+                display:none;
+                top:35%;
+            }
+
+            .container {
+                width: 80vw !important;
+                height: 50vh;
+                position: absolute;
+                left: 50%;
+                top: 25%;
+                transform: translate(-50%, 0%);
+                padding:50px;
+                overflow:hidden;
+            }
+        }
+
+        .rhodes {
+            background-image: url('img/rhodes.png');
+            background-size:cover;
+        }
+        .strawberry {
+            background-image: url('img/strawberry.png');
+            background-size:cover;
+        }
+        .vanhorn {
+            background-image: url('img/vanhorn.png');
+            background-size:cover;
+        }
+        .armadillo {
+            background-image: url('img/armadillo.png');
+            background-size:cover;
+        }
+        .tumbleweed {
+            background-image: url('img/tumbleweed.png');
+            background-size:cover;
+        }
+        .chuparosa {
+            background-image: url('img/chuparosa.png');
+            background-size:cover;
+        }
+
+        .row {
+            margin-bottom: 2vh;
+        }
+    </style>
+    <link rel="stylesheet" href="css/grid.css">
+  </head>
+  <body>
+    <span class="spawntext">SELECT A SPAWN LOCATION</span>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs">
+                <div class="box rhodes" id="Rhodes">
+                    <span class="title">RHODES</span>
+                </div>
+            </div>
+            <div class="col-xs">
+                <div class="box strawberry" id="Strawberry">
+                    <span class="title">STRAWBERRY</span>
+                </div>
+            </div>
+            <div class="col-xs">
+                <div class="box vanhorn" id="VanHorn">
+                    <span class="title">VAN HORN</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs">
+                <div class="box armadillo" id="Armadillo">
+                    <span class="title">ARMADILLO</span>
+                </div>
+            </div>
+            <div class="col-xs">
+                <div class="box tumbleweed" id="Tumbleweed">
+                    <span class="title">TUMBLEWEED</span>
+                </div>
+            </div>
+            <div class="col-xs">
+                <div class="box chuparosa" id="Chuparosa">
+                    <span class="title">CHUPAROSA</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        var selected = false;
+        $(".box").mouseenter(function() {
+            $(this).find(".title").fadeIn(250);
+        });
+        $(".box").mouseleave(function() {
+            $(this).find(".title").fadeOut(250);
+        });
+
+        $(".box").click(function() {
+            var selected = $(this).attr("id");
+            $.post(`https://${GetParentResourceName()}/select`, JSON.stringify({selected: selected}))
+        });
+
+        window.onload = function(e) {
+            window.addEventListener('message', (event) => {
+                if (event.data.type === 1){
+                    $("body").show();
+                } else if(event.data.type === 2){
+                    $("body").hide();
+                }
+            });
+        };
+    </script>
+  </body>
+</html>

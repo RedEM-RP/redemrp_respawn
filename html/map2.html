@@ -1,19 +1,7 @@
 <html>
 <style>
-    .SaintDenis {
-        clip-path: ellipse(4% 3.5% at 85.5% 54.5%);
-    }
-    .Valentine {
-        clip-path: ellipse(5% 4% at 59.5% 33%);
-    }
     .Rhodes {
         clip-path: ellipse(3% 3% at 73% 56%);
-    }
-    .Annesburg {
-        clip-path: ellipse(3.8% 3.5% at 85.6% 25.5%);
-    }
-    .Blackwater {
-        clip-path: ellipse(4% 4% at 54% 55%);
     }
     .Strawberry {
         clip-path: ellipse(3.5% 3% at 46.5% 46%);
@@ -24,16 +12,9 @@
     .Tumbleweed {
         clip-path: ellipse(4% 4% at 17.5% 74%);
     }
-    .MountHagen {
-        clip-path: ellipse(2.5% 2% at 50.5% 25%);
-    }
-    .BacchusStation {
-        clip-path: ellipse(2.5% 2% at 68% 21.5%);
-    }
     .VanHorn {
         clip-path: ellipse(3% 3% at 89% 34%);
     }
-
 
 
     img{
@@ -66,30 +47,10 @@
         var w = screen.width;
         var h = screen.height;
         var points = [{
-            x: 0.86,
-            y: 0.54,
-            r: 100,
-            n: 'SaintDenis'
-        }, {
-            x: 0.6,
-            y: 0.31,
-            r: 80,
-            n: 'Valentine'
-        }, {
             x: 0.73,
             y: 0.56,
             r: 100,
             n: 'Rhodes'
-        }, {
-            x: 0.88,
-            y: 0.23,
-            r: 100,
-            n: 'Annesburg'
-        }, {
-            x: 0.56,
-            y: 0.55,
-            r: 80,
-            n: 'Blackwater'
         }, {
             x: 0.48,
             y: 0.44,
@@ -105,16 +66,6 @@
             y: 0.71,
             r: 80,
             n: 'Tumbleweed'
-        }, {
-            x: 0.50,
-            y: 0.30,
-            r: 50,
-            n: 'MountHagen'
-        }, {
-            x: 0.68,
-            y: 0.18,
-            r: 50,
-            n: 'BacchusStation'
         }, {
             x: 0.88,
             y: 0.3,
@@ -160,15 +111,14 @@
             return Math.sqrt(a * a + b * b);
         }
         function showMap(yes){
-            console.log('PYK')
+            console.log('PYK');
             if (yes) content.style.visibility = 'inherit';
-            
             else content.style.visibility = 'hidden';
         }
 
         function select(){
             console.log("OK " + selected)
-            $.post('http:/redemrp_respawn/select',JSON.stringify(map.className));
+            $.post(`http://${GetParentResourceName()}/select`, JSON.stringify(map.className));
         }
     </script>
 
