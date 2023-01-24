@@ -64,7 +64,7 @@ RegisterServerEvent("redemrp_respawn:TestDeathStatus", function()
     end
 end)
 
-RedEM.CreateCallback("redemrp_respawn:IsPlayerDead", function(source, cb)
+RedEM.RegisterCallback("redemrp_respawn:IsPlayerDead", function(source, cb)
     local Player = RedEM.GetPlayer(source)
     if Player then
         if DeadPlayers[Player.citizenid] then
