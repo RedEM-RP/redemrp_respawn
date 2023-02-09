@@ -72,15 +72,15 @@
             r: 100,
             n: 'VanHorn'
         }];
+        
         var map = document.getElementById('map');
         var info = document.getElementById('info');
         var content = document.getElementById('content');
         var selected = -1;
-        console.log('INIT HTML' + document.location.pathname)
+        
         onmousemove = function (e) {
-           // console.log("mouse location: " + e.clientX / w + " " + e.clientY / h)
             info.innerHTML = "X: " + e.clientX / w + " Y: " + e.clientY / h;
-            //console.warn(points[0].x, points[0].y, w);
+            
             var show = false;
             var i = 0
             for (var p in points) {
@@ -102,7 +102,6 @@
         }
         function clickE(){
             if (map.className != "") select();
-            console.log("FFF" + selected + " " + map.className);
         }
 
         function dist(x1, y1, x2, y2) {
@@ -111,18 +110,15 @@
             return Math.sqrt(a * a + b * b);
         }
         function showMap(yes){
-            console.log('PYK');
             if (yes) content.style.visibility = 'inherit';
             else content.style.visibility = 'hidden';
         }
 
         function select(){
-            console.log("OK " + selected)
             $.post(`http://${GetParentResourceName()}/select`, JSON.stringify(map.className));
         }
     </script>
-
-
+    
 </body>
-
+    
 </html>
