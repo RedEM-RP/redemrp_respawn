@@ -285,7 +285,7 @@ RegisterNetEvent("redemrp_respawn:respawnCoords", function(coords)
     FreezeEntityPosition(ped, false)
 
     ShutdownLoadingScreen()
-    NetworkResurrectLocalPlayer(coords.x, coords.y, coords.z, 59.95, true, true, false)
+    NetworkResurrectLocalPlayer(coords.x, coords.y, coords.z, 59.95, true, false, false)
     SetEntityCoordsNoOffset(ped, coords.x, coords.y, coords.z, false, false, false, true)
     ClearPedTasksImmediately(ped)
     ClearPlayerWantedLevel(PlayerId())
